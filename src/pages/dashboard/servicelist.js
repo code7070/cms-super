@@ -2,12 +2,14 @@ const servicelist = [
   {
     name: "Saku Mas",
     urlPage: "sakumas",
-    iframe: "https://www.w3schools.com",
+    iframe: "https://www.youtube.com/embed/Y5VFQx9EQWo",
+    iframeTitle: "YouTube video player",
   },
   {
     name: "IMKas",
     urlPage: "imkas",
-    iframe: "https://indosatooredoo.com/portal/id/psdcimkaslanding",
+    iframe: "https://www.w3schools.com/",
+    iframeTitle: "IMKas",
   },
 ];
 

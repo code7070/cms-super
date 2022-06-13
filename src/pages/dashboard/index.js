@@ -43,9 +43,7 @@ const Dashboard = () => {
         <Sidebar />
       </div>
       <div className="flex-1 p-10 break-words bg-gray-200 shadow">
-        <p className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
-          {content}
-        </p>
+        <p className="container">{content}</p>
       </div>
     </div>
   );

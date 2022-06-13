@@ -8,6 +8,7 @@ const SidebarService = () => {
   const { pages = "", service: serviceParams = "" } = useParams();
 
   useEffect(() => {
+    setService(false);
     if (pages) setService(serviceMatching(pages));
   }, [pages]);
 
@@ -17,7 +18,15 @@ const SidebarService = () => {
       <p>{JSON.stringify(service)}</p>
       <p>
         {service && service.length > 0 && (
-          <iframe width={400} src={service.iframe} title={service.name} />
+          <iframe
+            width={600}
+            height={400}
+            frameBorder={0}
+            src={service[0].iframe}
+            title={service[0].iframeTitle}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
         )}
       </p>
     </div>
