@@ -19,13 +19,11 @@ const SidebarService = () => {
       <p>
         {service && service.length > 0 && (
           <iframe
-            width={600}
-            height={400}
+            width={service.iframeWidth || 600}
+            height={service.iframeHeight || 400}
             frameBorder={0}
             src={service[0].iframe}
             title={service[0].iframeTitle}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
           />
         )}
       </p>

@@ -8,8 +8,10 @@ const servicelist = [
   {
     name: "IMKas",
     urlPage: "imkas",
-    iframe: "https://www.w3schools.com/",
+    iframe: "https://cms-imkas.web.app/",
     iframeTitle: "IMKas",
+    iframeWidth: 1024,
+    iframeHeight: 700,
   },
 ];
 
