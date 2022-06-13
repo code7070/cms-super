@@ -3,12 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apicase/adapter-fetch": "^0.15.1",
+    "@apicase/services": "^0.8.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "js-cookie": "^3.0.1",
+    "modern-normalize": "^1.1.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-jwt": "^1.1.6",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "tailwindcss": "^3.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -34,5 +41,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "postcss": "^8.4.14",
+    "prettier": "^2.6.2",
+    "stylelint": "^14.9.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard-scss": "^4.0.0",
+    "stylelint-prettier": "^2.0.0"
   }
 }
