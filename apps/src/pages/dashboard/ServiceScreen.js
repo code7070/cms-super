@@ -24,11 +24,9 @@ const EmbedService = ({
         {JSON.stringify(urlIframe)}
       </div>
       {/* <Embed url={urlIframe} width={iframeWidth || 600} /> */}
-      <form method="post" action={iframe} target={frameId}>
+      <form method="post" target={frameId} action={urlIframe}>
         <input type="hidden" name="superAuth" value={isLogin()} />
-        <Button type="submit" onClick={() => setSet(true)}>
-          ACTIVATE TOKEN
-        </Button>
+        <Button type="submit">ACTIVATE TOKEN</Button>
       </form>
       <iframe
         className="mx-auto rounded-lg"

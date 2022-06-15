@@ -5,8 +5,8 @@ export const getCookie = (name) => {
   return Cookies.get(name);
 };
 
-export const setCookie = (name, value, expires = 1, path = "/") => {
-  return Cookies.set(name, value, { expires, path });
+export const setCookie = (name, value, expires = 1, path = "/", sameSite) => {
+  return Cookies.set(name, value, { expires, path, sameSite });
 };
 
 export const removeCookie = (name) => Cookies.remove(name);
