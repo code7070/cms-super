@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { isLogin } from "../../helpers/util";
 import MainDashboard from "./MainDashboard";
 import Sidebar from "./Sidebar";
-import SidebarService from "./SidebarService";
+import ServiceScreen from "./ServiceScreen";
 import UserInfo from "./UserInfo";
 
 const DashboardRoute = () => {
@@ -16,8 +16,8 @@ const DashboardRoute = () => {
     <Routes>
       <Route index path="/" element={<MainDashboard />} />
       <Route path="user-info" element={<UserInfo />} />
-      <Route path=":pages" element={<SidebarService />}>
-        <Route path=":service" element={<SidebarService />} />
+      <Route path=":pages" element={<ServiceScreen />}>
+        <Route path=":service" element={<ServiceScreen />} />
       </Route>
     </Routes>
   );
@@ -42,8 +42,8 @@ const Dashboard = () => {
       <div className="flex-initial">
         <Sidebar />
       </div>
-      <div className="flex-1 p-10 break-words bg-gray-200 shadow">
-        <p className="container">{content}</p>
+      <div className="flex-1 p-10 break-words bg-gray-200 shadow max-h-screen min-h-screen overflow-auto">
+        {content}
       </div>
     </div>
   );
