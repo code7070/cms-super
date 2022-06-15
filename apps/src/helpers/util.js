@@ -6,7 +6,12 @@ export const getCookie = (name) => {
 };
 
 export const setCookie = (name, value, expires = 1, path = "/", sameSite) => {
-  return Cookies.set(name, value, { expires, path, sameSite });
+  return Cookies.set(name, value, {
+    expires,
+    path,
+    secure: sameSite ? true : false,
+    sameSite,
+  });
 };
 
 export const removeCookie = (name) => Cookies.remove(name);
