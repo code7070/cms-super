@@ -47,7 +47,7 @@ const EmbedService = ({
     form.action = urlIframe;
     const hiddenField = document.createElement("input");
     hiddenField.type = "hidden";
-    hiddenField.name = "super-login";
+    hiddenField.name = "superAuth";
     hiddenField.value = isLogin();
     form.appendChild(hiddenField);
     document.body.appendChild(form);
