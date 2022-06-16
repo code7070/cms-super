@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Button from "../../components/button";
 import { isLogin, sendFormPost } from "../../helpers/util";
 import { serviceMatching } from "./servicelist";
 
@@ -29,6 +30,9 @@ const EmbedService = ({
   return (
     <>
       <button onClick={callIframe}>ACTIVATE TOKEN</button>
+      <form method="post" action={urlIframe} target={frameId}>
+        <Button type="submit">ACTIVATING TOKEN...</Button>
+      </form>
       <iframe
         className="mx-auto rounded-lg"
         name={frameId}
