@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { isLogin } from "../../helpers/util";
 import MainDashboard from "./MainDashboard";
 import Sidebar from "./Sidebar";
@@ -7,11 +6,6 @@ import ServiceScreen from "./ServiceScreen";
 import UserInfo from "./UserInfo";
 
 const DashboardRoute = () => {
-  const { pathname: path } = useLocation();
-  useEffect(() => {
-    console.log("PATH CHANGES: ", path);
-  }, [path]);
-
   return (
     <Routes>
       <Route index path="/" element={<MainDashboard />} />

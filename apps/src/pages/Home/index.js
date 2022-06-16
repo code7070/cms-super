@@ -17,12 +17,10 @@ const Home = () => {
     const jwt =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IndrbmQ4ODgiLCJuYW1lIjoiQWRpdHlhIFByYXRhbWEgTnVyIiwiaWF0IjoxNjU1MTI2NzE0OTI5fQ.ZK8C1jOmrPiQ3x4X7w3VvEvrDjd5WfpxPafW4aQMFGs";
     setCookie("super-login", jwt, 1, "/", "None");
-    // setCookie("super-login", jwt);
-    localStorage.setItem("super-login", jwt);
     setTimeout(() => {
       setLoading(false);
       toDashboard();
-    }, 2000);
+    }, 1500);
   };
 
   let ctaView = <Button text="Login Here" onClick={clickLogin} />;
