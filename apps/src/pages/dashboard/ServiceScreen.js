@@ -28,10 +28,7 @@ const EmbedService = ({
 
   return (
     <>
-      {/* <form method="post" target={frameId} action={urlIframe}>
-        <input type="hidden" name="superAuth" value={isLogin()} />
-        <Button type="submit">ACTIVATE TOKEN</Button>
-      </form> */}
+      <button onClick={callIframe}>ACTIVATE TOKEN</button>
       <iframe
         className="mx-auto rounded-lg"
         name={frameId}
@@ -42,7 +39,6 @@ const EmbedService = ({
         title={iframeTitle}
         // sandbox="allow-scripts allow-same-origin allow-top-navigation allow-form allow-popups allow-pointer-lock allow-popup-to-escape-sandbox"
         sandbox="allow-scripts allow-same-origin allow-top-navigation"
-        onLoad={callIframe}
       />
     </>
   );

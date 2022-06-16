@@ -26,9 +26,9 @@ export const isLocalLogin = () => {
 
 export const sendFormPost = (path, target, params, method = "post") => {
   const form = document.createElement("form");
+  form.method = target;
   form.method = method;
   form.action = path;
-  form.method = target;
 
   for (const key in params) {
     if (params.hasOwnProperty(key)) {
