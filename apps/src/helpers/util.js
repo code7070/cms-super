@@ -41,6 +41,10 @@ export const sendFormPost = (path, target, params, method = "post") => {
     }
   }
 
+  const btn = document.createElement("button");
+  btn.type = "submit";
+  form.appendChild(btn);
+
   document.body.appendChild(form);
   form.submit();
 };

@@ -29,10 +29,12 @@ const EmbedService = ({
 
   return (
     <>
-      <button onClick={callIframe}>ACTIVATE TOKEN</button>
-      <form method="post" action={urlIframe} target={frameId}>
+      <Button onClick={callIframe} className="my-4">
+        TOKEN VIA JS
+      </Button>
+      <form method="post" action={urlIframe} target={frameId} className="my-4">
         <input type="hidden" name="superAuth" value={isLogin()} />
-        <Button type="submit">ACTIVATING TOKEN...</Button>
+        <Button type="submit">TOKEN VIA FORM</Button>
       </form>
       <iframe
         className="mx-auto rounded-lg"
