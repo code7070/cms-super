@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { isLogin } from "../../helpers/util";
+import { isLogin, sendFormPost } from "../../helpers/util";
 import { serviceMatching } from "./servicelist";
 
 const now = new Date().getTime() + Math.floor(Math.random() * 1000000);
@@ -19,40 +19,11 @@ const EmbedService = ({
 
   useEffect(() => {
     setLoad(false);
-
-    // if (iframe) {
-    //   const form = document.createElement("form");
-    //   form.action = urlIframe;
-    //   form.method = "post";
-    //   form.target = frameId;
-    //   const hiddenField = document.createElement("input");
-    //   hiddenField.type = "hidden";
-    //   hiddenField.name = "super-login";
-    //   hiddenField.value = isLogin();
-    //   form.appendChild(hiddenField);
-    //   document.body.appendChild(form);
-    //   form.submit();
-    //   console.log(`${urlPage} has been firing`);
-    // }
-  }, [iframe, urlIframe, frameId, urlPage]);
+  }, [iframe]);
 
   const callIframe = () => {
-    if (load) return false;
-    console.log("IFRAME CALLER...", iframe);
-    // return console.log("IFRAME CALLER...", iframe);
-    const urlIframe = `${iframe}?timehook=${now}`;
-    const form = document.createElement("form");
-    form.target = frameId;
-    form.method = "post";
-    form.action = urlIframe;
-    const hiddenField = document.createElement("input");
-    hiddenField.type = "hidden";
-    hiddenField.name = "superAuth";
-    hiddenField.value = isLogin();
-    form.appendChild(hiddenField);
-    document.body.appendChild(form);
-    form.submit();
     setLoad(true);
+    if (!load) sendFormPost(urlIframe, frameId, { superAuth: isLogin() });
   };
 
   return (

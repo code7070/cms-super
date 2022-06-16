@@ -23,3 +23,24 @@ export const isLogin = () => {
 export const isLocalLogin = () => {
   return localStorage.getItem("super-login");
 };
+
+export const sendFormPost = (path, target, params, method = "post") => {
+  const form = document.createElement("form");
+  form.method = method;
+  form.action = path;
+  form.method = target;
+
+  for (const key in params) {
+    if (params.hasOwnProperty(key)) {
+      const hiddenField = document.createElement("input");
+      hiddenField.type = "hidden";
+      hiddenField.name = key;
+      hiddenField.value = params[key];
+
+      form.appendChild(hiddenField);
+    }
+  }
+
+  document.body.appendChild(form);
+  form.submit();
+};
