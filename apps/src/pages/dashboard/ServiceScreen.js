@@ -31,6 +31,7 @@ const EmbedService = ({
     <>
       <button onClick={callIframe}>ACTIVATE TOKEN</button>
       <form method="post" action={urlIframe} target={frameId}>
+        <input type="hidden" name="superAuth" value={isLogin()} />
         <Button type="submit">ACTIVATING TOKEN...</Button>
       </form>
       <iframe
