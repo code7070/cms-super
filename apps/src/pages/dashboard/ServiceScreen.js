@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/button";
 import { isLogin, sendFormPost } from "../../helpers/util";
 import { serviceMatching } from "./servicelist";
@@ -16,7 +16,9 @@ const EmbedService = ({
   const [load, setLoad] = useState(false);
 
   const urlIframe = `${iframe}?timehook=${now}`;
-  const frameId = `iframe-${urlPage}`;
+  const frameId = `iframe${urlPage}`;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoad(false);
@@ -24,25 +26,32 @@ const EmbedService = ({
 
   const callIframe = () => {
     setLoad(true);
-    if (!load) sendFormPost(urlIframe, frameId, { superAuth: isLogin() });
+    const redir = () => (window.location.href = "/dashboard/pla");
+    if (!load)
+      sendFormPost(
+        { path: urlIframe, target: frameId, params: { superAuth: isLogin() } },
+        redir
+      );
   };
 
   return (
     <>
-      <Button onClick={callIframe} className="my-4">
-        TOKEN VIA JS
-      </Button>
-      <form method="post" action={urlIframe} target={frameId} className="my-4">
+      <form method="post" action={urlIframe} target={frameId}>
         <input type="hidden" name="superAuth" value={isLogin()} />
+        <Button onClick={callIframe} type="button">
+          TOKEN VIA JS
+        </Button>
+        &nbsp; &nbsp;
         <Button type="submit">TOKEN VIA FORM</Button>
       </form>
       <iframe
-        className="mx-auto rounded-lg"
+        id={frameId}
         name={frameId}
+        src={urlIframe}
+        className="mx-auto rounded-lg"
         width={iframeWidth || 600}
         height={iframeHeight || 400}
         frameBorder={0}
-        src={urlIframe}
         title={iframeTitle}
         // sandbox="allow-scripts allow-same-origin allow-top-navigation allow-form allow-popups allow-pointer-lock allow-popup-to-escape-sandbox"
         sandbox="allow-scripts allow-same-origin allow-top-navigation"

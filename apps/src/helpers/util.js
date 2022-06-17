@@ -24,7 +24,10 @@ export const isLocalLogin = () => {
   return localStorage.getItem("super-login");
 };
 
-export const sendFormPost = (path, target, params, method = "post") => {
+export const sendFormPost = (
+  { path, target, params, method = "post" },
+  callback
+) => {
   const form = document.createElement("form");
   form.method = target;
   form.method = method;
@@ -46,5 +49,5 @@ export const sendFormPost = (path, target, params, method = "post") => {
   form.appendChild(btn);
 
   document.body.appendChild(form);
-  form.submit();
+  form.submit(callback);
 };

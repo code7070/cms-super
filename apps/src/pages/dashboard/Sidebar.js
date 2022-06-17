@@ -1,6 +1,5 @@
-import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
-import { isLogin, removeCookie } from "../../helpers/util";
+import { isLogin, removeCookie, sendFormPost } from "../../helpers/util";
 import servicelist from "./servicelist";
 import { IconDashboard, IconLogout, IconUser } from "./SidebarIcon";
 
@@ -21,11 +20,6 @@ const postCookie = (path, params = {}, method = "post") => {
 
   document.body.appendChild(form);
   form.submit();
-};
-
-const sendCookiePla = () => {
-  const cookieLogin = isLogin();
-  postCookie("http://103.186.1.191", { superAuth: cookieLogin });
 };
 
 const BadgeNotif = ({ count }) => (
@@ -59,7 +53,12 @@ const menulist = [
     onClick: () => {
       localStorage.removeItem("super-login");
       removeCookie("super-login");
-      window.location.href = "/";
+      sendFormPost(`https://pla.wknd-otto.my.id/`, "logoutFrame", {
+        superAuth: "",
+      });
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 100);
     },
   },
 ];
@@ -75,6 +74,7 @@ const Sidebar = () => {
 
   return (
     <aside className="w-64" aria-label="Sidebar">
+      <iframe id="logoutFrame" name="logoutFrame" style={{ display: "none" }} />
       <div className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 h-screen">
         <ul className="space-y-2">
           {menulist.map((item) => (
