@@ -29,7 +29,7 @@ export const sendFormPost = (
   callback
 ) => {
   const form = document.createElement("form");
-  form.method = target;
+  form.target = target;
   form.method = method;
   form.action = path;
 
