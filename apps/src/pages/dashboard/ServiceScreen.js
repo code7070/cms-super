@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/button";
 import { isLogin, sendFormPost } from "../../helpers/util";
@@ -18,33 +18,31 @@ const EmbedService = ({
   const urlIframe = `${iframe}?timehook=${now}`;
   const frameId = `iframe${urlPage}`;
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setLoad(false);
-  }, [iframe]);
-
-  const callIframe = () => {
+  const callIframe = useCallback(() => {
     setLoad(true);
-    const redir = () => (window.location.href = "/dashboard/pla");
     if (!load)
       sendFormPost({
         path: urlIframe,
         target: frameId,
         params: { superAuth: isLogin() },
       });
-  };
+  }, [load, urlIframe]);
+
+  useEffect(() => {
+    setLoad(false);
+    callIframe();
+  }, [iframe, callIframe]);
 
   return (
     <>
-      <form method="post" action={urlIframe} target={frameId}>
+      {/* <form method="post" action={urlIframe} target={frameId}>
         <input type="hidden" name="superAuth" value={isLogin()} />
         <Button onClick={callIframe} type="button">
           TOKEN VIA JS
         </Button>
         &nbsp; &nbsp;
         <Button type="submit">TOKEN VIA FORM</Button>
-      </form>
+      </form> */}
       <iframe
         id={frameId}
         name={frameId}
