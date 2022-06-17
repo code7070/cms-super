@@ -2,17 +2,6 @@ import IconWknd, { IconImkas, IconSakumas } from "./SidebarIcon";
 
 const servicelist = [
   {
-    name: "WKND - CMS",
-    urlPage: "weekend-cms",
-    link: "weekend-cms",
-    iframe: "https://www.w3schools.com/js/js_validation.asp",
-    iframeTitle: "Weekend",
-    iframeWidth: 1024,
-    iframeHeight: 700,
-    isPro: true,
-    icon: <IconWknd />,
-  },
-  {
     name: "PLA",
     urlPage: "pla",
     link: "pla",
@@ -33,6 +22,17 @@ const servicelist = [
     iframeWidth: 1024,
     iframeHeight: 700,
     icon: <IconSakumas />,
+  },
+  {
+    name: "GOLD",
+    urlPage: "gold",
+    link: "gold",
+    iframe: "https://www.w3schools.com/js/js_validation.asp",
+    iframeTitle: "Weekend",
+    iframeWidth: 1024,
+    iframeHeight: 700,
+    isPro: true,
+    icon: <IconWknd />,
   },
 ];
 
