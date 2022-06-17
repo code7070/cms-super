@@ -28,10 +28,11 @@ const EmbedService = ({
     setLoad(true);
     const redir = () => (window.location.href = "/dashboard/pla");
     if (!load)
-      sendFormPost(
-        { path: urlIframe, target: frameId, params: { superAuth: isLogin() } },
-        redir
-      );
+      sendFormPost({
+        path: urlIframe,
+        target: frameId,
+        params: { superAuth: isLogin() },
+      });
   };
 
   return (
