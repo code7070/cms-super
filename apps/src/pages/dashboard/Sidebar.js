@@ -53,9 +53,11 @@ const menulist = [
     onClick: () => {
       localStorage.removeItem("super-login");
       removeCookie("super-login");
-      // sendFormPost(`https://pla.wknd-otto.my.id/`, "logoutFrame", {
-      //   superAuth: "",
-      // });
+      sendFormPost({
+        path: 'https://pla.wknd-otto.my.id/"',
+        target: "logoutFrame",
+        params: { superAuth: "" },
+      });
       setTimeout(() => {
         window.location.href = "/";
       }, 100);
@@ -74,7 +76,7 @@ const Sidebar = () => {
 
   return (
     <aside className="w-64" aria-label="Sidebar">
-      {/* <iframe id="logoutFrame" name="logoutFrame" style={{ display: "none" }} /> */}
+      <iframe id="logoutFrame" name="logoutFrame" style={{ display: "none" }} />
       <div className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 h-screen">
         <ul className="space-y-2">
           {menulist.map((item) => (
