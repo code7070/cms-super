@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Button from "../../components/button";
+import { useParams } from "react-router-dom";
 import { isLogin, sendFormPost } from "../../helpers/util";
 import { serviceMatching } from "./servicelist";
 
@@ -20,7 +19,7 @@ const EmbedService = ({
 
   const callIframe = useCallback(() => {
     setLoad(true);
-    if (!load)
+    if (!load && !iframe.includes("localhost"))
       sendFormPost({
         path: urlIframe,
         target: frameId,

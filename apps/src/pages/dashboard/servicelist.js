@@ -5,7 +5,7 @@ const servicelist = [
     name: "PLA",
     urlPage: "pla",
     link: "pla",
-    iframe: "https://pla.wknd-otto.my.id/",
+    iframe: "http://localhost:3031",
     iframeTitle: "PLA",
     iframeWidth: 1024,
     iframeHeight: 700,
