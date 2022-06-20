@@ -41,7 +41,6 @@ app.get("/", async (req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post("/", (req, res) => {
-  console.log("POST BODY IMKAS: ", req, res);
   if (req.body.superAuth) res.cookie("super-login", req.body.superAuth);
   return res.sendFile(path.join(__dirname, targetFolder, "index.html"));
 });

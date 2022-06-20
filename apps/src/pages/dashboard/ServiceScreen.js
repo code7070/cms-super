@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ContentWrapper } from ".";
+import Button from "../../components/button";
 import { isLogin, sendFormPost } from "../../helpers/util";
 import { serviceMatching } from "./servicelist";
 
@@ -12,36 +14,42 @@ const EmbedService = ({
   iframeHeight,
   iframeTitle,
 }) => {
-  const [load, setLoad] = useState(false);
+  const [load, setLoad] = useState([]);
 
   const urlIframe = `${iframe}?timehook=${now}`;
   const frameId = `iframe${urlPage}`;
+  const obj = useCallback(
+    () => ({ target: frameId, path: urlIframe }),
+    [frameId, urlIframe]
+  );
 
   const callIframe = useCallback(() => {
     setLoad(true);
-    if (!load && !iframe.includes("localhost"))
+    if (!load && !obj.path.includes("localhost")) {
+      console.log("called");
       sendFormPost({
-        path: urlIframe,
-        target: frameId,
+        ...obj,
         params: { superAuth: isLogin() },
       });
-  }, [load, urlIframe]);
+    }
+  }, [load, obj]);
 
   useEffect(() => {
     setLoad(false);
     callIframe();
   }, [iframe, callIframe]);
 
+  const forceLogout = () => {
+    const frame = document.getElementById(frameId);
+    if (frame) {
+      const target = frame ? frame.contentWindow : null;
+      target.postMessage("logout", "*");
+    }
+  };
+
   return (
     <>
-      {/* <form method="post" action={urlIframe} target={frameId}>
-        <input type="hidden" name="superAuth" value={isLogin()} />
-        <Button onClick={callIframe} type="button">
-          TOKEN VIA JS
-        </Button>
-        &nbsp; &nbsp;
-        <Button type="submit">TOKEN VIA FORM</Button>
-      </form> */}
+      <Button onClick={forceLogout}>Logout</Button>
       <iframe
         id={frameId}
         name={frameId}
@@ -52,7 +60,7 @@ const EmbedService = ({
         frameBorder={0}
         title={iframeTitle}
         // sandbox="allow-scripts allow-same-origin allow-top-navigation allow-form allow-popups allow-pointer-lock allow-popup-to-escape-sandbox"
-        sandbox="allow-scripts allow-same-origin allow-top-navigation"
+        sandbox="allow-scripts allow-modals allow-popups allow-same-origin allow-top-navigation"
       />
     </>
   );
@@ -65,6 +73,7 @@ const ServiceScreen = () => {
 
   useEffect(() => {
     setService(false);
+    console.log({ pages });
     if (pages) setService(serviceMatching(pages));
   }, [pages]);
 
@@ -73,11 +82,9 @@ const ServiceScreen = () => {
     servicepage = <EmbedService {...service[0]} />;
 
   return (
-    <div className="text-center">
-      {/* <p className="text-3xl text-gray-700 font-bold mb-5">CMS - {pages}</p> */}
-      {/* <p>{JSON.stringify(service)}</p> */}
-      <p>{servicepage}</p>
-    </div>
+    <ContentWrapper>
+      <div className="text-center">{servicepage}</div>
+    </ContentWrapper>
   );
 };
 
