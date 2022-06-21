@@ -53,8 +53,10 @@ const ServiceScreen = () => {
       const hit = (params) => {
         if (params && Object.keys(params).length < 1) return "";
         const form = { path: `${iframe}?timehook=${now}`, target };
-        sendFormPost({ ...form, params: { deleteAuth: "deleteAuth" } });
-        // sendFormPost({ ...form, params });
+        const remBody = { ...form, params: { deleteAuth: "deleteAuth" } };
+        console.log("BODY: ", remBody);
+        // sendFormPost(remBody);
+        sendFormPost({ ...form, params });
       };
 
       if (el && el.hasAttribute("src")) hit({ superAuth });
@@ -66,7 +68,37 @@ const ServiceScreen = () => {
     servicepage = <ServiceLayer {...service[0]} />;
   // servicepage = <EmbedService {...service[0]} />;
 
-  return <ContentWrapper>{servicepage}</ContentWrapper>;
+  return (
+    <ContentWrapper>
+      <div>
+        <button
+          onClick={() => {
+            const url = `${service[0].iframe}/logout`;
+            console.log("Starting fetch: ", url);
+            fetch(url, { method: "GET" })
+              .then((res) => res.json())
+              .then(() => console.log("FETCHING... DONE"));
+          }}
+        >
+          Logout using fetch
+        </button>
+        &nbsp; &nbsp; &nbsp;
+        <button
+          onClick={() => {
+            const now = getTimeNow();
+            const target = getFrameCmsId();
+            const { iframe } = service[0];
+            const form = { path: `${iframe}?timehook=${now}`, target };
+            const remBody = { ...form, params: { deleteAuth: "deleteAuth" } };
+            sendFormPost(remBody);
+          }}
+        >
+          Logout using form post
+        </button>
+      </div>
+      <div>{servicepage}</div>
+    </ContentWrapper>
+  );
 };
 
 export default ServiceScreen;
