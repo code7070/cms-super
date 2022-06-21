@@ -44,10 +44,11 @@ export const sendFormPost = (
     }
   }
 
-  const btn = document.createElement("button");
-  btn.type = "submit";
-  form.appendChild(btn);
-
   document.body.appendChild(form);
   form.submit(callback);
 };
+
+export const getTimeNow = () =>
+  new Date().getTime() + Math.floor(Math.random() * 1000000);
+
+export const getFrameCmsId = () => "superCmsFrame";
