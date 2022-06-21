@@ -3,8 +3,8 @@ import IconWknd, { IconImkas, IconSakumas } from "./SidebarIcon";
 const servicelist = [
   {
     name: "PLA",
-    urlPage: "pla",
-    link: "pla",
+    urlPage: "/dashboard/pla",
+    link: "/dashboard/pla",
     iframe: "https://pla.wknd-otto.my.id",
     iframeTitle: "PLA",
     iframeWidth: 1024,
@@ -14,8 +14,8 @@ const servicelist = [
   },
   {
     name: "Insurance",
-    urlPage: "insurance",
-    link: "insurance",
+    urlPage: "/dashboard/insurance",
+    link: "/dashboard/insurance",
     iframe: "https://tailwindcss.com/docs/screens",
     // iframe: "http://localhost:3031",
     iframeTitle: "Insurance",
@@ -25,8 +25,8 @@ const servicelist = [
   },
   {
     name: "GOLD",
-    urlPage: "gold",
-    link: "gold",
+    urlPage: "/dashboard/gold",
+    link: "/dashboard/gold",
     iframe: "https://www.w3schools.com/js/js_validation.asp",
     iframeTitle: "Weekend",
     iframeWidth: 1024,
@@ -38,7 +38,9 @@ const servicelist = [
 
 const serviceMatching = (urlPage) => {
   if (!urlPage) return "";
-  const match = servicelist.filter((i) => i.urlPage === urlPage);
+  const match = servicelist.filter(
+    (i) => i.urlPage === `/dashboard/${urlPage}`
+  );
   return match;
 };
 
