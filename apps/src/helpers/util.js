@@ -28,7 +28,7 @@ export const sendFormPost = (
   { path, target, params, method = "post" },
   callback
 ) => {
-  return new Promise(() => {
+  return new Promise((resolve, reject) => {
     const form = document.createElement("form");
     form.target = target;
     form.method = method;
@@ -40,13 +40,13 @@ export const sendFormPost = (
         hiddenField.type = "hidden";
         hiddenField.name = key;
         hiddenField.value = params[key];
-
         form.appendChild(hiddenField);
       }
     }
 
     document.body.appendChild(form);
     form.submit(callback);
+    setTimeout(resolve, 500, "success");
   });
 };
 

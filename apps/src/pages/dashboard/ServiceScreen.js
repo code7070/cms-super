@@ -19,10 +19,10 @@ const ServiceScreen = (props = { service: {} }) => {
       const { iframe } = service;
       const el = document.getElementById(target);
 
-      const hit = (params) => {
+      const hit = async (params) => {
         if (params && Object.keys(params).length < 1) return "";
         const form = { path: `${iframe}?timehook=${now}`, target };
-        sendFormPost({ ...form, params });
+        await sendFormPost({ ...form, params });
       };
 
       if (el && el.hasAttribute("src")) hit({ superAuth });
@@ -51,13 +51,13 @@ const ServiceScreen = (props = { service: {} }) => {
         </button>
         <button
           className="mx-4"
-          onClick={() => {
+          onClick={async () => {
             const now = getTimeNow();
             const target = getFrameCmsId();
             const { iframe } = service;
             const form = { path: `${iframe}?timehook=${now}`, target };
             const remBody = { ...form, params: { deleteAuth: "deleteAuth" } };
-            sendFormPost(remBody);
+            await sendFormPost(remBody);
           }}
         >
           Logout using Form POST

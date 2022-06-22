@@ -47,9 +47,7 @@ const menulist = [
   },
 ];
 
-const MenuItem = ({ item, nowPath, service }) => {
-  const [loading, setLoading] = useState(false);
-
+const MenuItem = ({ item, nowPath, service, loading, setLoading }) => {
   const navigate = useNavigate();
 
   const forceLogout = async () => {
@@ -59,7 +57,6 @@ const MenuItem = ({ item, nowPath, service }) => {
     const form = { path: `${iframe}?timehook=${now}`, target };
     const remBody = { ...form, params: { deleteAuth: "deleteAuth" } };
     const res = await sendFormPost(remBody);
-    console.log("Res: ", res);
     return res;
   };
 
@@ -69,12 +66,16 @@ const MenuItem = ({ item, nowPath, service }) => {
     e.preventDefault();
     const logout = await forceLogout();
     console.log("Logout response: ", logout);
+    navigate(item.link);
     if (typeof item.onClick === "function") item.onClick();
     setLoading(false);
   };
 
   return (
-    <li key={item.link}>
+    <li
+      key={item.link}
+      className={`${loading ? "pointer-events-none opacity-50" : ""}`}
+    >
       <Link
         to={{ pathname: item.link }}
         state={{ prev: nowPath }}
@@ -93,6 +94,8 @@ const MenuItem = ({ item, nowPath, service }) => {
 };
 
 const Sidebar = ({ service }) => {
+  const [loading, setLoading] = useState(false);
+
   const { pathname: nowPath } = useLocation();
 
   return (
@@ -106,6 +109,8 @@ const Sidebar = ({ service }) => {
                 item={item}
                 nowPath={nowPath}
                 service={service}
+                loading={loading}
+                setLoading={setLoading}
               />
             ))}
           </ul>
