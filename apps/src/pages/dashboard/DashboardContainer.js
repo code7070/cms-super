@@ -18,6 +18,7 @@ const DashboardContainer = ({ children }) => {
   }, [par]);
 
   const propsPass = { service };
+  console.log("Dashboard: ", service);
 
   return (
     <div className="mx-auto flex">

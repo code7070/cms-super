@@ -63,9 +63,11 @@ const MenuItem = ({ item, nowPath, service, loading, setLoading }) => {
   const linkClick = async (e) => {
     console.log("Link Click Start...");
     setLoading(item.link);
-    e.preventDefault();
-    const logout = await forceLogout();
-    console.log("Logout response: ", logout);
+    if (service && Object.keys(service).length > 0) {
+      e.preventDefault();
+      const logout = await forceLogout();
+      console.log("Logout response: ", logout);
+    }
     navigate(item.link);
     if (typeof item.onClick === "function") item.onClick();
     setLoading(false);
