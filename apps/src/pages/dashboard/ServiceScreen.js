@@ -34,76 +34,7 @@ const ServiceScreen = (props = { service: {} }) => {
     servicepage = <ServiceLayer {...service} />;
   // servicepage = <EmbedService {...service} />;
 
-  return (
-    <ContentWrapper>
-      <div>
-        <button
-          className="mx-4"
-          onClick={() => {
-            const url = `${service.iframe}/logout`;
-            console.log("Starting fetch: ", url);
-            fetch(url, { method: "GET" })
-              .then((res) => res.json())
-              .then(() => console.log("FETCHING... DONE"));
-          }}
-        >
-          Logout using fetch
-        </button>
-        <button
-          className="mx-4"
-          onClick={async () => {
-            const now = getTimeNow();
-            const target = getFrameCmsId();
-            const { iframe } = service;
-            const form = { path: `${iframe}?timehook=${now}`, target };
-            const remBody = { ...form, params: { deleteAuth: "deleteAuth" } };
-            await sendFormPost(remBody);
-          }}
-        >
-          Logout using Form POST
-        </button>
-        <button
-          className="mx-4"
-          onClick={() => {
-            console.log("Starting POST...");
-            const now = getTimeNow();
-            const target = getFrameCmsId();
-            const { iframe } = service;
-            const path = `${iframe}?timehook=${now}`;
-            const params = { deleteAuth: "deleteAuth" };
-            const formBody = { path, target, params };
-            const body = new FormData();
-            body.append("deleteAuth", "deleteAuth");
-            fetch(path, { method: "POST", body }).then((res) => {
-              alert("Fetching POST Logout Done");
-            });
-          }}
-        >
-          Logout using fetch POST
-        </button>
-        <button
-          className="mx-4"
-          onClick={() => {
-            console.log("Starting GET...");
-            const now = getTimeNow();
-            const target = getFrameCmsId();
-            const { iframe } = service;
-            const path = `${iframe}/logout?timehook=${now}`;
-            const params = { deleteAuth: "deleteAuth" };
-            const formBody = { path, target, params };
-            const body = new FormData();
-            body.append("deleteAuth", "deleteAuth");
-            fetch(path, { method: "POST" }).then((res) => {
-              alert("Fetching GET Logout Done");
-            });
-          }}
-        >
-          Logout using fetch GET
-        </button>
-      </div>
-      <div>{servicepage}</div>
-    </ContentWrapper>
-  );
+  return <ContentWrapper>{servicepage}</ContentWrapper>;
 };
 
 export default ServiceScreen;
