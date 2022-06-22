@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ContentWrapper } from ".";
 import {
   getFrameCmsId,
@@ -8,12 +8,12 @@ import {
   sendFormPost,
 } from "../../helpers/util";
 import ServiceLayer from "./ServiceLayer";
-import servicelist, { serviceMatching } from "./servicelist";
+import { serviceMatching } from "./servicelist";
 
 const ServiceScreen = () => {
   const [service, setService] = useState(false);
 
-  const loc = useLocation();
+  // const loc = useLocation();
   const { pages = "" } = useParams();
 
   // useEffect(() => {
@@ -72,6 +72,7 @@ const ServiceScreen = () => {
     <ContentWrapper>
       <div>
         <button
+          className="mx-4"
           onClick={() => {
             const url = `${service[0].iframe}/logout`;
             console.log("Starting fetch: ", url);
@@ -82,8 +83,8 @@ const ServiceScreen = () => {
         >
           Logout using fetch
         </button>
-        &nbsp; &nbsp; &nbsp;
         <button
+          className="mx-4"
           onClick={() => {
             const now = getTimeNow();
             const target = getFrameCmsId();
@@ -94,6 +95,25 @@ const ServiceScreen = () => {
           }}
         >
           Logout using form post
+        </button>
+        <button
+          className="mx-4"
+          onClick={() => {
+            console.log("Starting...");
+            const now = getTimeNow();
+            const target = getFrameCmsId();
+            const { iframe } = service[0];
+            const path = `${iframe}?timehook=${now}`;
+            const params = { deleteAuth: "deleteAuth" };
+            const formBody = { path, target, params };
+            const body = new FormData();
+            body.append("deleteAuth", "deleteAuth");
+            fetch(path, { method: "POST", body })
+              .then((res) => res.json())
+              .then(() => alert("Fetching Post Logout Done"));
+          }}
+        >
+          Logout using fetch post
         </button>
       </div>
       <div>{servicepage}</div>
