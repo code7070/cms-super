@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { ContentWrapper } from ".";
 import {
   getFrameCmsId,
@@ -8,54 +7,21 @@ import {
   sendFormPost,
 } from "../../helpers/util";
 import ServiceLayer from "./ServiceLayer";
-import { serviceMatching } from "./servicelist";
 
-const ServiceScreen = () => {
-  const [service, setService] = useState(false);
-
-  // const loc = useLocation();
-  const { pages = "" } = useParams();
-
-  // useEffect(() => {
-  //   console.log("CHANGES: ", loc);
-  //   const { pathname: path, state: locState } = loc;
-  //   const prev = locState.prev;
-  //   if (path !== prev) {
-  //     // console.log("Different: ", { path, prev });
-  //     const found = servicelist.find((i) => i.link === prev);
-  //     if (found && Object.keys(found).length > 0) {
-  //       // console.log("Found: ", found);
-  //       const now = getTimeNow();
-  //       const target = getFrameCmsId();
-  //       const { iframe } = found;
-  //       const form = { path: `${iframe}?timehook=${now}`, target };
-  //       const params = { superAuth: "" };
-  //       // sendFormPost({...form, params})
-  //       console.log("POST: ", { ...form, params });
-  //     }
-  //   }
-  //   console.log("====================================================");
-  // }, [loc]);
+const ServiceScreen = (props = { service: {} }) => {
+  const { service } = props;
 
   useEffect(() => {
-    if (pages) setService(serviceMatching(pages));
-  }, [pages]);
-
-  // Coupled with iframe in ServiceLayer to hit iframe
-  useEffect(() => {
-    if (service && service.length > 0) {
+    if (service && Object.keys(service).length) {
       const now = getTimeNow();
       const target = getFrameCmsId();
       const superAuth = isLogin();
-      const { iframe } = service[0];
+      const { iframe } = service;
       const el = document.getElementById(target);
 
       const hit = (params) => {
         if (params && Object.keys(params).length < 1) return "";
         const form = { path: `${iframe}?timehook=${now}`, target };
-        const remBody = { ...form, params: { deleteAuth: "deleteAuth" } };
-        console.log("BODY: ", remBody);
-        // sendFormPost(remBody);
         sendFormPost({ ...form, params });
       };
 
@@ -64,9 +30,9 @@ const ServiceScreen = () => {
   }, [service]);
 
   let servicepage = "";
-  if (service && service.length > 0)
-    servicepage = <ServiceLayer {...service[0]} />;
-  // servicepage = <EmbedService {...service[0]} />;
+  if (service && Object.keys(service).length)
+    servicepage = <ServiceLayer {...service} />;
+  // servicepage = <EmbedService {...service} />;
 
   return (
     <ContentWrapper>
@@ -74,7 +40,7 @@ const ServiceScreen = () => {
         <button
           className="mx-4"
           onClick={() => {
-            const url = `${service[0].iframe}/logout`;
+            const url = `${service.iframe}/logout`;
             console.log("Starting fetch: ", url);
             fetch(url, { method: "GET" })
               .then((res) => res.json())
@@ -88,7 +54,7 @@ const ServiceScreen = () => {
           onClick={() => {
             const now = getTimeNow();
             const target = getFrameCmsId();
-            const { iframe } = service[0];
+            const { iframe } = service;
             const form = { path: `${iframe}?timehook=${now}`, target };
             const remBody = { ...form, params: { deleteAuth: "deleteAuth" } };
             sendFormPost(remBody);
@@ -102,7 +68,7 @@ const ServiceScreen = () => {
             console.log("Starting POST...");
             const now = getTimeNow();
             const target = getFrameCmsId();
-            const { iframe } = service[0];
+            const { iframe } = service;
             const path = `${iframe}?timehook=${now}`;
             const params = { deleteAuth: "deleteAuth" };
             const formBody = { path, target, params };
@@ -121,7 +87,7 @@ const ServiceScreen = () => {
             console.log("Starting GET...");
             const now = getTimeNow();
             const target = getFrameCmsId();
-            const { iframe } = service[0];
+            const { iframe } = service;
             const path = `${iframe}/logout?timehook=${now}`;
             const params = { deleteAuth: "deleteAuth" };
             const formBody = { path, target, params };

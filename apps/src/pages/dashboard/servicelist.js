@@ -36,13 +36,11 @@ const servicelist = [
   },
 ];
 
-const serviceMatching = (urlPage) => {
+const getServiceMatching = (urlPage) => {
   if (!urlPage) return "";
-  const match = servicelist.filter(
-    (i) => i.urlPage === `/dashboard/${urlPage}`
-  );
+  const match = servicelist.find((i) => i.urlPage === `/dashboard/${urlPage}`);
   return match;
 };
 
-export { serviceMatching };
+export { getServiceMatching };
 export default servicelist;

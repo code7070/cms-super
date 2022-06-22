@@ -1,5 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
-import { removeCookie } from "../../helpers/util";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  getFrameCmsId,
+  getTimeNow,
+  removeCookie,
+  sendFormPost,
+} from "../../helpers/util";
 import servicelist from "./servicelist";
 import { IconDashboard, IconLogout, IconUser } from "./SidebarIcon";
 
@@ -41,31 +47,66 @@ const menulist = [
   },
 ];
 
-const Sidebar = () => {
+const MenuItem = ({ item, nowPath, service }) => {
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const forceLogout = async () => {
+    const now = getTimeNow();
+    const target = getFrameCmsId();
+    const { iframe } = service;
+    const form = { path: `${iframe}?timehook=${now}`, target };
+    const remBody = { ...form, params: { deleteAuth: "deleteAuth" } };
+    const res = await sendFormPost(remBody);
+    console.log("Res: ", res);
+    return res;
+  };
+
+  const linkClick = async (e) => {
+    console.log("Link Click Start...");
+    setLoading(item.link);
+    e.preventDefault();
+    const logout = await forceLogout();
+    console.log("Logout response: ", logout);
+    if (typeof item.onClick === "function") item.onClick();
+    setLoading(false);
+  };
+
+  return (
+    <li key={item.link}>
+      <Link
+        to={{ pathname: item.link }}
+        state={{ prev: nowPath }}
+        onClick={linkClick}
+        className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+      >
+        {item.icon}
+        <span className="flex-1 ml-3 whitespace-nowrap">
+          {loading === item.link ? "loading..." : item.name}
+        </span>
+        {item.isPro && <BadgePro />}
+        {item.notification && <BadgeNotif count={item.notification} />}
+      </Link>
+    </li>
+  );
+};
+
+const Sidebar = ({ service }) => {
   const { pathname: nowPath } = useLocation();
+
   return (
     <div className="flex-initial">
       <aside className="w-64" aria-label="Sidebar">
         <div className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 h-screen">
           <ul className="space-y-2">
             {menulist.map((item) => (
-              <li key={item.link}>
-                <Link
-                  to={{ pathname: item.link }}
-                  state={{ prev: nowPath }}
-                  onClick={item.onClick}
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-                >
-                  {item.icon}
-                  <span className="flex-1 ml-3 whitespace-nowrap">
-                    {item.name}
-                  </span>
-                  {item.isPro && <BadgePro />}
-                  {item.notification && (
-                    <BadgeNotif count={item.notification} />
-                  )}
-                </Link>
-              </li>
+              <MenuItem
+                key={item.link}
+                item={item}
+                nowPath={nowPath}
+                service={service}
+              />
             ))}
           </ul>
         </div>

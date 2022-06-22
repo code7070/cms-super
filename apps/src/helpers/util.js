@@ -28,24 +28,26 @@ export const sendFormPost = (
   { path, target, params, method = "post" },
   callback
 ) => {
-  const form = document.createElement("form");
-  form.target = target;
-  form.method = method;
-  form.action = path;
+  return new Promise(() => {
+    const form = document.createElement("form");
+    form.target = target;
+    form.method = method;
+    form.action = path;
 
-  for (const key in params) {
-    if (params.hasOwnProperty(key)) {
-      const hiddenField = document.createElement("input");
-      hiddenField.type = "hidden";
-      hiddenField.name = key;
-      hiddenField.value = params[key];
+    for (const key in params) {
+      if (params.hasOwnProperty(key)) {
+        const hiddenField = document.createElement("input");
+        hiddenField.type = "hidden";
+        hiddenField.name = key;
+        hiddenField.value = params[key];
 
-      form.appendChild(hiddenField);
+        form.appendChild(hiddenField);
+      }
     }
-  }
 
-  document.body.appendChild(form);
-  form.submit(callback);
+    document.body.appendChild(form);
+    form.submit(callback);
+  });
 };
 
 export const getTimeNow = () =>
