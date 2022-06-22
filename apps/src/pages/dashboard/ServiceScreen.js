@@ -94,12 +94,12 @@ const ServiceScreen = () => {
             sendFormPost(remBody);
           }}
         >
-          Logout using form post
+          Logout using Form POST
         </button>
         <button
           className="mx-4"
           onClick={() => {
-            console.log("Starting...");
+            console.log("Starting POST...");
             const now = getTimeNow();
             const target = getFrameCmsId();
             const { iframe } = service[0];
@@ -108,12 +108,31 @@ const ServiceScreen = () => {
             const formBody = { path, target, params };
             const body = new FormData();
             body.append("deleteAuth", "deleteAuth");
-            fetch(path, { method: "POST", body })
-              .then((res) => res.json())
-              .then(() => alert("Fetching Post Logout Done"));
+            fetch(path, { method: "POST", body }).then((res) => {
+              alert("Fetching POST Logout Done");
+            });
           }}
         >
-          Logout using fetch post
+          Logout using fetch POST
+        </button>
+        <button
+          className="mx-4"
+          onClick={() => {
+            console.log("Starting GET...");
+            const now = getTimeNow();
+            const target = getFrameCmsId();
+            const { iframe } = service[0];
+            const path = `${iframe}/logout?timehook=${now}`;
+            const params = { deleteAuth: "deleteAuth" };
+            const formBody = { path, target, params };
+            const body = new FormData();
+            body.append("deleteAuth", "deleteAuth");
+            fetch(path, { method: "POST" }).then((res) => {
+              alert("Fetching GET Logout Done");
+            });
+          }}
+        >
+          Logout using fetch GET
         </button>
       </div>
       <div>{servicepage}</div>
