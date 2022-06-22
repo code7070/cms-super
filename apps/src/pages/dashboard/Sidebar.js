@@ -53,10 +53,14 @@ const MenuItem = ({ item, nowPath, service, loading, setLoading }) => {
   const forceLogout = async () => {
     const now = getTimeNow();
     const target = getFrameCmsId();
-    const { iframe } = service;
-    const form = { path: `${iframe}?timehook=${now}`, target };
-    const remBody = { ...form, params: { deleteAuth: "deleteAuth" } };
-    const res = await sendFormPost(remBody);
+    const el = document.getElementById(target);
+    let res = "default";
+    if (el) {
+      const { iframe } = service;
+      const form = { path: `${iframe}?timehook=${now}`, target };
+      const remBody = { ...form, params: { deleteAuth: "deleteAuth" } };
+      res = await sendFormPost(remBody);
+    }
     return res;
   };
 
