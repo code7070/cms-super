@@ -30,7 +30,7 @@ const menulist = [
   ...servicelist,
   {
     name: "Users Info",
-    link: "user-info",
+    link: "/dashboard/user-info",
     icon: <IconUser />,
   },
   {
