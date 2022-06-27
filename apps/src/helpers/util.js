@@ -54,3 +54,5 @@ export const getTimeNow = () =>
   new Date().getTime() + Math.floor(Math.random() * 1000000);
 
 export const getFrameCmsId = () => "superCmsFrame";
+
+export const isFunction = (fn) => typeof fn === "function";

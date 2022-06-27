@@ -13,7 +13,7 @@ const ServiceLayer = (
 ) => {
   if (!service) return "";
 
-  const { iframe, urlPage, iframeWidth, iframeHeight, iframeTitle } = service;
+  const { iframe, iframeTitle } = service;
 
   const frameId = getFrameCmsId();
 

@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import DashboardContainer from "./pages/dashboard/DashboardContainer";
 import MainDashboard from "./pages/dashboard/MainDashboard";
-import NewDashboard from "./pages/dashboard/NewDashboard";
+// import NewDashboard from "./pages/dashboard/NewDashboard";
 import ServiceScreen from "./pages/dashboard/ServiceScreen";
 import UserInfo from "./pages/dashboard/UserInfo";
 import Home from "./pages/Home";

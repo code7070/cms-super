@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   getFrameCmsId,
   getTimeNow,
+  isFunction,
   removeCookie,
   sendFormPost,
 } from "../../helpers/util";
@@ -66,15 +67,17 @@ const MenuItem = ({ item, nowPath, service, loading, setLoading }) => {
 
   const linkClick = async (e) => {
     console.log("Link Click Start...");
-    setLoading(item.link);
-    if (service && Object.keys(service).length > 0) {
-      e.preventDefault();
-      const logout = await forceLogout();
-      console.log("Logout response: ", logout);
+    if (isFunction(item.onClick)) item.onClick();
+    else {
+      setLoading(item.link);
+      if (service && Object.keys(service).length > 0) {
+        e.preventDefault();
+        const logout = await forceLogout();
+        console.log("Logout response: ", logout);
+      }
+      navigate(item.link);
+      setLoading(false);
     }
-    navigate(item.link);
-    if (typeof item.onClick === "function") item.onClick();
-    setLoading(false);
   };
 
   return (
