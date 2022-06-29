@@ -1,0 +1,20 @@
+FROM node:14-alpine AS development
+ENV NODE_ENV development
+#add work directory
+WORKDIR /app
+#cache and install deps
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install
+#copy app files
+COPY . .
+EXPOSE 3030
+# CMD ["yarn", "start"]
+CMD ["node", "../middleware/server.js"]
+
+
+# DEPLOYMENT NOTES #
+  # make 2 process
+  # aware for docker images size (< 50)
+  # make 3 dockerfile
+  # documentation: app port

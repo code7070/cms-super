@@ -1,12 +1,22 @@
-FROM node:14-alpine AS development
-ENV NODE_ENV development
-#add work directory
+FROM node:16-alpine AS builder
+ENV NODE_ENV production
+# Add work directory
 WORKDIR /app
-#cache and install deps
+# Cache and Install deps
 COPY package.json .
 COPY yarn.lock .
-RUN yarn install
-#copy app files
+# Copy files and repalce app env
 COPY . .
+RUN cp .env.production .env
+# Install and build app
+RUN yarn install
+RUN yarn build
+
+
+# Bundle static
+FROM node:16-alpine AS serve
+ENV NODE_ENV production
+COPY --from=builder /app/build .
 EXPOSE 3030
-CMD ["yarn", "start"]
+# Start the App
+CMD ["node", "./middleware/server.js"]

@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 
 const port = process.env.PORT || 8000;
 const app = express();
-const targetFolder = "../apps/build";
+const targetFolder = "../build";
 
 // DENY USING "puppeteer": "^8.0.0",
 
