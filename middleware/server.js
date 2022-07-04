@@ -7,9 +7,10 @@ const bodyParser = require("body-parser");
 // const { shouldShowPrerenderedPage } = require("./prerender");
 // const { prerenderPage } = require("./prerender");
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 4000;
 const app = express();
-const targetFolder = "../build";
+const targetFolder = "../apps/build";
+console.log("SERVER: ", port);
 
 // DENY USING "puppeteer": "^8.0.0",
 

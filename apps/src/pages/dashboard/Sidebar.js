@@ -16,37 +16,41 @@ const BadgeNotif = ({ count }) => (
   </span>
 );
 
-const BadgePro = () => (
+const BadgePro = ({ text = "Pro" }) => (
   <span className="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">
-    Pro
+    {text}
   </span>
 );
 
-const menulist = [
-  {
-    name: "Dashboard",
-    link: "/dashboard",
-    icon: <IconDashboard />,
+const dashboard = {
+  name: "Dashboard",
+  link: "/dashboard",
+  icon: <IconDashboard />,
+};
+
+const userInfo = {
+  name: "Users Info",
+  link: "/dashboard/user-info",
+  icon: <IconUser />,
+};
+
+const logout = {
+  name: "Sign Out",
+  link: "sign-out",
+  icon: <IconLogout />,
+  onClick: () => {
+    localStorage.removeItem("super-login");
+    removeCookie("super-login");
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 100);
   },
-  ...servicelist,
-  {
-    name: "Users Info",
-    link: "/dashboard/user-info",
-    icon: <IconUser />,
-  },
-  {
-    name: "Sign Out",
-    link: "sign-out",
-    icon: <IconLogout />,
-    onClick: () => {
-      localStorage.removeItem("super-login");
-      removeCookie("super-login");
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 100);
-    },
-  },
-];
+};
+
+const majorHead = [dashboard];
+const majorFoot = [userInfo, logout];
+
+const menulist = [dashboard, ...servicelist, userInfo, logout];
 
 const MenuItem = ({ item, nowPath, service, loading, setLoading }) => {
   const navigate = useNavigate();
@@ -95,7 +99,7 @@ const MenuItem = ({ item, nowPath, service, loading, setLoading }) => {
         <span className="flex-1 ml-3 whitespace-nowrap">
           {loading === item.link ? "loading..." : item.name}
         </span>
-        {item.isPro && <BadgePro />}
+        {item.isPro && <BadgePro text={item.isPro} />}
         {item.notification && <BadgeNotif count={item.notification} />}
       </Link>
     </li>
@@ -112,7 +116,30 @@ const Sidebar = ({ service }) => {
       <aside className="w-64" aria-label="Sidebar">
         <div className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 h-screen">
           <ul className="space-y-2">
-            {menulist.map((item) => (
+            {majorHead.map((item) => (
+              <MenuItem
+                key={item.link}
+                item={item}
+                nowPath={nowPath}
+                service={service}
+                loading={loading}
+                setLoading={setLoading}
+              />
+            ))}
+            <div className="rounded-xl border-2 border-gray-400 border-solid">
+              {servicelist.map((item) => (
+                <MenuItem
+                  key={item.link}
+                  item={item}
+                  nowPath={nowPath}
+                  service={service}
+                  loading={loading}
+                  setLoading={setLoading}
+                />
+              ))}
+            </div>
+
+            {majorFoot.map((item) => (
               <MenuItem
                 key={item.link}
                 item={item}

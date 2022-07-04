@@ -4,7 +4,7 @@ WORKDIR /app
 COPY apps/package.json .
 COPY apps/yarn.lock .
 COPY apps .
-RUN cp /app/.env.production .env
+RUN cp /app/.env.production.example .env
 RUN yarn install
 RUN yarn build
 
@@ -14,7 +14,7 @@ WORKDIR /middleware
 COPY middleware/package.json .
 COPY middleware/yarn.lock .
 COPY middleware .
-RUN cp /middleware/.env.production .env
+RUN cp /middleware/.env.production.example .env
 RUN yarn install
 
 
@@ -24,6 +24,6 @@ ENV NODE_ENV production
 #RUN npm i -g pm2
 COPY --from=middleware /middleware ./middleware
 COPY --from=builder /app/build ./build
-EXPOSE 8000
+EXPOSE 3000
 # Start the App
 CMD ["node", "./middleware/server.js"]

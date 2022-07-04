@@ -9,7 +9,8 @@ const servicelist = [
     iframeTitle: "PLA",
     iframeWidth: 1024,
     iframeHeight: 700,
-    notification: 3,
+    // notification: 3,
+    isPro: "CMS",
     icon: <IconImkas />,
   },
   {
@@ -21,6 +22,7 @@ const servicelist = [
     iframeTitle: "Insurance",
     iframeWidth: 1024,
     iframeHeight: 700,
+    isPro: "CMS",
     icon: <IconSakumas />,
   },
   {
@@ -31,7 +33,7 @@ const servicelist = [
     iframeTitle: "Weekend",
     iframeWidth: 1024,
     iframeHeight: 700,
-    isPro: true,
+    isPro: "CMS",
     icon: <IconWknd />,
   },
 ];

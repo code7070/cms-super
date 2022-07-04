@@ -35,6 +35,9 @@ const Home = () => {
         <p>Please Login</p>
         {ctaView}
       </p>
+      <p className="text-gray-500 text-lg text-center">
+        {process.env.REACT_APP_ENVIRONMENT}
+      </p>
     </div>
   );
 };
