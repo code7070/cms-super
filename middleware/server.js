@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 // const { shouldShowPrerenderedPage } = require("./prerender");
 // const { prerenderPage } = require("./prerender");
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8000;
 const app = express();
 const targetFolder = "../apps/build";
 console.log("SERVER: ", port);
