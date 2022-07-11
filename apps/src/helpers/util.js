@@ -46,7 +46,10 @@ export const sendFormPost = (
 
     document.body.appendChild(form);
     form.submit(callback);
-    setTimeout(resolve, 500, "success");
+    setTimeout(() => {
+      resolve("success");
+      document.body.removeChild(form);
+    }, 500);
   });
 };
 
