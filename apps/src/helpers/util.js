@@ -56,3 +56,5 @@ export const getTimeNow = () =>
 export const getFrameCmsId = () => "superCmsFrame";
 
 export const isFunction = (fn) => typeof fn === "function";
+
+export const isLocal = process.env.REACT_APP_ENVIRONMENT === "local";

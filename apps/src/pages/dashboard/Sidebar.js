@@ -50,7 +50,7 @@ const logout = {
 const majorHead = [dashboard];
 const majorFoot = [userInfo, logout];
 
-const menulist = [dashboard, ...servicelist, userInfo, logout];
+// const menulist = [dashboard, ...servicelist, userInfo, logout];
 
 const MenuItem = ({ item, nowPath, service, loading, setLoading }) => {
   const navigate = useNavigate();

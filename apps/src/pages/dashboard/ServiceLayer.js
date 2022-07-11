@@ -1,4 +1,4 @@
-import { getFrameCmsId, getTimeNow } from "../../helpers/util";
+import { getFrameCmsId, getTimeNow, isLocal } from "../../helpers/util";
 
 const now = getTimeNow();
 
@@ -9,15 +9,16 @@ const ServiceLayer = (
     iframeWidth: "",
     iframeHeight: "",
     iframeTitle: "",
+    localFrame: "",
   }
 ) => {
   if (!service) return "";
 
-  const { iframe, iframeTitle } = service;
+  const { iframe, iframeTitle, localFrame } = service;
 
   const frameId = getFrameCmsId();
-
-  const urlIframe = `${iframe}?timehook=${now}`;
+  const frame = isLocal && localFrame ? localFrame : iframe;
+  const urlIframe = `${frame}?timehook=${now}`;
 
   return (
     <>
@@ -26,7 +27,7 @@ const ServiceLayer = (
         name={frameId}
         title={iframeTitle}
         src={urlIframe}
-        sandbox="allow-scripts allow-modals allow-popups allow-same-origin allow-top-navigation"
+        sandbox="allow-scripts allow-popups allow-same-origin allow-top-navigation"
         className="max-w-full w-full h-screen"
       />
     </>

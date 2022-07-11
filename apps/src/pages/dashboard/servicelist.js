@@ -6,6 +6,7 @@ const servicelist = [
     urlPage: "/dashboard/gold",
     link: "/dashboard/gold",
     iframe: "https://gold.wknd-otto.my.id",
+    localFrame: "localhost:3031",
     iframeTitle: "Gold",
     iframeWidth: 1024,
     iframeHeight: 700,
