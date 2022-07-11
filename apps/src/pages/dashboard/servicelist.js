@@ -2,11 +2,11 @@ import IconWknd, { IconImkas, IconSakumas } from "./SidebarIcon";
 
 const servicelist = [
   {
-    name: "PLA",
-    urlPage: "/dashboard/pla",
-    link: "/dashboard/pla",
-    iframe: "https://pla.wknd-otto.my.id",
-    iframeTitle: "PLA",
+    name: "GOLD",
+    urlPage: "/dashboard/gold",
+    link: "/dashboard/gold",
+    iframe: "https://gold.wknd-otto.my.id",
+    iframeTitle: "Gold",
     iframeWidth: 1024,
     iframeHeight: 700,
     // notification: 3,
