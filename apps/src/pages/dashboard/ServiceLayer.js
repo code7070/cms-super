@@ -20,17 +20,24 @@ const ServiceLayer = (
   const frame = isLocal && localFrame ? localFrame : iframe;
   const urlIframe = `${frame}?timehook=${now}`;
 
+  const frameLoaded = (e) => {
+    console.log("iframe loaded", e);
+    const frameCMS = document.getElementById(frameId);
+    if (frameCMS && frameCMS.contentWindow) {
+      console.log("href: ", frameCMS.contentWindow.location.href);
+    }
+  };
+
   return (
-    <>
-      <iframe
-        id={frameId}
-        name={frameId}
-        title={iframeTitle}
-        src={urlIframe}
-        sandbox="allow-scripts allow-popups allow-same-origin allow-top-navigation"
-        className="max-w-full w-full h-screen"
-      />
-    </>
+    <iframe
+      onLoad={frameLoaded}
+      id={frameId}
+      name={frameId}
+      title={iframeTitle}
+      src={urlIframe}
+      sandbox="allow-scripts allow-popups allow-same-origin allow-top-navigation"
+      className="max-w-full w-full h-screen"
+    />
   );
 };
 

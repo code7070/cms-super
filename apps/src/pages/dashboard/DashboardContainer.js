@@ -10,7 +10,6 @@ const DashboardContainer = ({ children }) => {
   const par = useParams();
 
   useEffect(() => {
-    console.log("Params Changed: ", par);
     if (par && par.pages) {
       const found = getServiceMatching(par.pages);
       if (found) setService(found);
@@ -18,7 +17,6 @@ const DashboardContainer = ({ children }) => {
   }, [par]);
 
   const propsPass = { service };
-  console.log("Dashboard: ", service);
 
   return (
     <div className="mx-auto flex">

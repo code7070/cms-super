@@ -1,4 +1,4 @@
-import IconWknd, { IconImkas, IconSakumas } from "./SidebarIcon";
+import { IconImkas, IconSakumas } from "./SidebarIcon";
 
 const servicelist = [
   {
@@ -25,17 +25,6 @@ const servicelist = [
     iframeHeight: 700,
     isPro: "CMS",
     icon: <IconSakumas />,
-  },
-  {
-    name: "GOLD",
-    urlPage: "/dashboard/gold",
-    link: "/dashboard/gold",
-    iframe: "https://www.w3schools.com/js/js_validation.asp",
-    iframeTitle: "Weekend",
-    iframeWidth: 1024,
-    iframeHeight: 700,
-    isPro: "CMS",
-    icon: <IconWknd />,
   },
 ];
 
