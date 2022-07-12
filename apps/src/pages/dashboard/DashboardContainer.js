@@ -14,11 +14,9 @@ const DashboardContainer = ({ children }) => {
   console.log("Params: ", par);
 
   useEffect(() => {
-    console.log("LOCATION", loc);
-  }, [loc]);
-
-  useEffect(() => {
     if (par.pages) {
+      console.log("Param Pages: ", par.pages);
+      console.log("======================================================");
       const found = getServiceMatching(par.pages);
       if (found) setService(found);
     }
@@ -43,8 +41,9 @@ const DashboardContainer = ({ children }) => {
             : currPath;
         const target = `${parentPath}${paths}${dataSearch}`;
         console.log("Navigate to: ", target);
-        // navigate(target, { replace: true });
+        navigate(target, { replace: true });
       }
+      console.log("======================================================");
     };
 
     window.addEventListener("message", catcher);
