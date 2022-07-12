@@ -28,17 +28,21 @@ const DashboardContainer = ({ children }) => {
     const catcher = (e) => {
       console.log("SuperCMS is listen  {data}: ", e.data);
 
-      const currentPath = loc.pathname;
-      // const currentSearch = loc.search;
+      const currPath = loc.pathname;
+      const currPathLength = currPath.length;
+      // const currSearch = loc.search;
 
       if (e && e.data && e.data.pathname) {
         const dataPath = `${e.data.pathname}`;
-        const paths =
-          `${dataPath}`.charAt(0) === "/" ? dataPath.slice(1) : dataPath;
+        const paths = dataPath;
         const dataSearch = `${e.data.search}`;
-        const target = `${currentPath}${paths}${dataSearch}`;
+        const parentPath =
+          currPath.charAt(currPathLength - 1) === "/"
+            ? currPath.slice(currPathLength - 1)
+            : currPath;
+        const target = `${parentPath}${paths}${dataSearch}`;
         console.log("Navigate to: ", target);
-        console.log({ currentPath }, { paths }, { dataSearch });
+        console.log({ currPath }, { paths }, { parentPath }, { dataSearch });
         // navigate(target, { replace: true });
       }
     };
