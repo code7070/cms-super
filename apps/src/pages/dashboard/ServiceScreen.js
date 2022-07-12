@@ -31,7 +31,7 @@ const ServiceScreen = (props = { service: {} }) => {
 
       if (el && el.hasAttribute("src")) hit({ superAuth });
     }
-  }, [service, routePar]);
+  }, [service, routePar.tailcms]);
 
   let servicepage = "No Service Provied";
   if (service && Object.keys(service).length)
