@@ -38,16 +38,16 @@ const UserInfo = () => {
               `You're not login`
             )}
           </p>
-          <form method="post" action="http://103.186.1.191">
-            <input
-              type="text"
-              name="superAuth"
-              onChange={onChangeAuth}
-              value={auth}
-              placeholder="auth-token-here"
-            />
-            <button type="submit">GO!</button>
-          </form>
+          {/* <form method="post" action="http://103.186.1.191"> */}
+          <input
+            type="text"
+            name="superAuth"
+            onChange={onChangeAuth}
+            value={auth}
+            placeholder="auth-token-here"
+          />
+          <button type="submit">GO!</button>
+          {/* </form> */}
         </div>
       </ContentWrapper>
     </DashboardContainer>

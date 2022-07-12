@@ -26,20 +26,19 @@ const DashboardContainer = ({ children, cmsmode }) => {
         console.log("Super listen: ", event.data);
         const { pages = "", tailcms = "" } = par;
         const defaults = "/dashboard";
-        const tail = `${event.data.pathname || tailcms}`.replace(
-          /^\/|\/$/g,
-          ""
-        );
+        const datapath = event.data.pathname;
+        const tail = `${datapath || tailcms}`.replace(/^\/|\/$/g, "");
         // const formattingTail = `${tail}`.replace(/^\/|\/$/g, '')
         const fullpath = `${defaults}/${pages}/${tail}`;
-        console.log(`Navigate to: ${fullpath}`, { fullpath });
+        console.log(`Navigate to: ${fullpath}`);
+        navigate(fullpath, { replace: true });
       };
 
       window.addEventListener("message", listenMessage);
 
       return () => window.removeEventListener("message", listenMessage);
     }
-  }, [par, loc.pathname, cmsmode]);
+  }, [par, navigate, loc.pathname, cmsmode]);
 
   // useEffect(() => {
   //   const catcher = (e) => {
