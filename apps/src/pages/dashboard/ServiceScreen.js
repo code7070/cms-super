@@ -31,7 +31,11 @@ const ServiceScreen = (props = { service: {} }) => {
       const hit = async (params) => {
         if (params && Object.keys(params).length < 1) return "";
         const mainpath = `${iframe}${routePar.tailcms || ""}?timehook=${now}`;
-        console.log("Form Post: ", mainpath);
+        console.log("Form Post: ", {
+          iframe,
+          mainpath,
+          tailcms: routePar.tailcms,
+        });
         const form = { path: `${iframe}?timehook=${now}`, target };
         await sendFormPost({ ...form, params });
 
