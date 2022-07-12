@@ -25,9 +25,9 @@ const DashboardContainer = ({ children }) => {
       console.log("Super listen: ", event.data);
       const { pages = "", tailcms = "" } = par;
       const defaults = "/dashboard";
-      const tail = event.data.pathname || tailcms;
-      const formattingTail = `${tail}`.charAt(0) === "/" ? tail.slice(1) : tail;
-      const fullpath = `${defaults}/${pages}/${formattingTail}`;
+      const tail = `${event.data.pathname || tailcms}`.replace(/^\/|\/$/g, "");
+      // const formattingTail = `${tail}`.replace(/^\/|\/$/g, '')
+      const fullpath = `${defaults}/${pages}/${tail}`;
       console.log(`Navigate to: ${fullpath}`, { fullpath });
     };
 
