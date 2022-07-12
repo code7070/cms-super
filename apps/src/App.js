@@ -48,6 +48,7 @@ function App() {
             element={
               <DashboardContainer>
                 <h2>This is CMS FREE</h2>
+                <ServiceScreen />
               </DashboardContainer>
             }
           />
