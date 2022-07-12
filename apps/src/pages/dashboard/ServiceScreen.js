@@ -6,7 +6,6 @@ import {
   isLogin,
   sendFormPost,
 } from "../../helpers/util";
-import DashboardContainer from "./DashboardContainer";
 import ServiceLayer from "./ServiceLayer";
 
 const ServiceScreen = (props = { service: {} }) => {
