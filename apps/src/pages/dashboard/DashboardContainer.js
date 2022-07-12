@@ -14,7 +14,7 @@ const DashboardContainer = ({ children }) => {
   console.log("Params: ", par);
 
   useEffect(() => {
-    console.log("LOCATION");
+    console.log("LOCATION", loc);
   }, [loc]);
 
   useEffect(() => {
