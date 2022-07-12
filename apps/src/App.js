@@ -43,14 +43,7 @@ function App() {
               </DashboardContainer>
             }
           />
-          <Route
-            path=":cmsFree"
-            element={
-              <DashboardContainer>
-                <ServiceScreen />
-              </DashboardContainer>
-            }
-          />
+          <Route path=":cmsFree" element={<div>Hello CMS FREE!!!</div>} />
         </Route>
       </Route>
     </Routes>

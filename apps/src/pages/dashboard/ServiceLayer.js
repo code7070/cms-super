@@ -24,7 +24,7 @@ const ServiceLayer = (
     console.log("iframe loaded", e);
     const frameCMS = document.getElementById(frameId);
     if (frameCMS && frameCMS.contentWindow) {
-      console.log("href: ", frameCMS.contentWindow.location.href);
+      // console.log("href: ", frameCMS.contentWindow.location.href);
     }
   };
 
