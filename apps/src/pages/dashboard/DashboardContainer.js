@@ -36,7 +36,7 @@ const DashboardContainer = ({ children }) => {
         const dataSearch = `${e.data.search}`;
         const target = `${currentPath}${dataPath}${dataSearch}`;
         console.log("Navigate to: ", target);
-        // navigate(path, { replace: true });
+        navigate(target, { replace: true });
       }
     };
 
