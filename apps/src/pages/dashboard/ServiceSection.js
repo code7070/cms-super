@@ -3,7 +3,7 @@ import ServiceScreen from "./ServiceScreen";
 
 const ServiceSection = () => {
   return (
-    <DashboardContainer>
+    <DashboardContainer cmsmode>
       <ServiceScreen />
     </DashboardContainer>
   );

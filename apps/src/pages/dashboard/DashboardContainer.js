@@ -4,7 +4,7 @@ import addPropsToChildren from "../../helpers/addPropsToChildren";
 import { getServiceMatching } from "./servicelist";
 import Sidebar from "./Sidebar";
 
-const DashboardContainer = ({ children }) => {
+const DashboardContainer = ({ children, cmsmode }) => {
   const [service, setService] = useState(false);
 
   const navigate = useNavigate();
@@ -21,20 +21,25 @@ const DashboardContainer = ({ children }) => {
   useEffect(() => {
     console.log("Param Changes: ", par);
 
-    const listenMessage = (event) => {
-      console.log("Super listen: ", event.data);
-      const { pages = "", tailcms = "" } = par;
-      const defaults = "/dashboard";
-      const tail = `${event.data.pathname || tailcms}`.replace(/^\/|\/$/g, "");
-      // const formattingTail = `${tail}`.replace(/^\/|\/$/g, '')
-      const fullpath = `${defaults}/${pages}/${tail}`;
-      console.log(`Navigate to: ${fullpath}`, { fullpath });
-    };
+    if (cmsmode) {
+      const listenMessage = (event) => {
+        console.log("Super listen: ", event.data);
+        const { pages = "", tailcms = "" } = par;
+        const defaults = "/dashboard";
+        const tail = `${event.data.pathname || tailcms}`.replace(
+          /^\/|\/$/g,
+          ""
+        );
+        // const formattingTail = `${tail}`.replace(/^\/|\/$/g, '')
+        const fullpath = `${defaults}/${pages}/${tail}`;
+        console.log(`Navigate to: ${fullpath}`, { fullpath });
+      };
 
-    window.addEventListener("message", listenMessage);
+      window.addEventListener("message", listenMessage);
 
-    return () => window.removeEventListener("message", listenMessage);
-  }, [par, loc.pathname]);
+      return () => window.removeEventListener("message", listenMessage);
+    }
+  }, [par, loc.pathname, cmsmode]);
 
   // useEffect(() => {
   //   const catcher = (e) => {
