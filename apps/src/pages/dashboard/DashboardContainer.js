@@ -15,41 +15,43 @@ const DashboardContainer = ({ children }) => {
 
   useEffect(() => {
     if (par.pages) {
-      console.log("Param Pages: ", par.pages);
-      console.log("======================================================");
       const found = getServiceMatching(par.pages);
       if (found) setService(found);
     }
   }, [par.pages]);
 
   useEffect(() => {
-    const catcher = (e) => {
-      console.log("SuperCMS is listen  {data}: ", e.data);
+    console.log("Param Changes: ", par);
+  }, [par]);
 
-      const currPath = loc.pathname;
-      const currPathLength = currPath.length;
-      // const currSearch = loc.search;
+  // useEffect(() => {
+  //   const catcher = (e) => {
+  //     console.log("SuperCMS is listen  {data}: ", e.data);
 
-      if (e && e.data && e.data.pathname) {
-        const dataPath = `${e.data.pathname}`;
-        const paths =
-          dataPath === "/" || dataPath === "" ? "" : e.data.pathname;
-        const dataSearch = `${e.data.search}`;
-        const parentPath =
-          currPath.charAt(currPathLength - 1) === "/"
-            ? currPath.slice(currPathLength - 1)
-            : currPath;
-        const target = `${parentPath}${paths}${dataSearch}`;
-        console.log("Navigate to: ", target);
-        navigate(target, { replace: true });
-      }
-      console.log("======================================================");
-    };
+  //     const currPath = loc.pathname;
+  //     const currPathLength = currPath.length;
+  //     // const currSearch = loc.search;
 
-    window.addEventListener("message", catcher);
+  //     if (e && e.data && e.data.pathname) {
+  //       const dataPath = `${e.data.pathname}`;
+  //       const paths =
+  //         dataPath === "/" || dataPath === "" ? "" : e.data.pathname;
+  //       const dataSearch = `${e.data.search}`;
+  //       const parentPath =
+  //         currPath.charAt(currPathLength - 1) === "/"
+  //           ? currPath.slice(currPathLength - 1)
+  //           : currPath;
+  //       const target = `${parentPath}${paths}${dataSearch}`;
+  //       console.log("Navigate to: ", target);
+  //       navigate(target, { replace: true });
+  //     }
+  //     console.log("======================================================");
+  //   };
 
-    return () => window.removeEventListener("message", catcher);
-  }, [navigate, loc.pathname]);
+  //   window.addEventListener("message", catcher);
+
+  //   return () => window.removeEventListener("message", catcher);
+  // }, [navigate, loc.pathname]);
 
   const propsPass = { service };
 
