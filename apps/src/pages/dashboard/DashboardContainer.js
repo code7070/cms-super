@@ -9,12 +9,14 @@ const DashboardContainer = ({ children }) => {
 
   const par = useParams();
 
+  console.log("Params: ", par);
+
   useEffect(() => {
-    if (par && par.pages) {
+    if (par.pages) {
       const found = getServiceMatching(par.pages);
       if (found) setService(found);
     }
-  }, [par]);
+  }, [par.pages]);
 
   const propsPass = { service };
 

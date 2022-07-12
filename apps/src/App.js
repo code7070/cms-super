@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import DashboardContainer from "./pages/dashboard/DashboardContainer";
@@ -8,10 +9,14 @@ import UserInfo from "./pages/dashboard/UserInfo";
 import Home from "./pages/Home";
 
 function App() {
+  useEffect(() => {
+    window.addEventListener("message", function (event) {
+      console.log("SuperCMS is listen: ", event);
+    });
+  }, []);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      {/* <Route path="dashboard/*" element={<NewDashboard />} /> */}
       <Route path="dashboard">
         <Route
           index
@@ -29,14 +34,24 @@ function App() {
             </DashboardContainer>
           }
         />
-        <Route
-          path=":pages"
-          element={
-            <DashboardContainer>
-              <ServiceScreen />
-            </DashboardContainer>
-          }
-        />
+        <Route path=":pages">
+          <Route
+            index
+            element={
+              <DashboardContainer>
+                <ServiceScreen />
+              </DashboardContainer>
+            }
+          />
+          <Route
+            path=":cmsFree"
+            element={
+              <DashboardContainer>
+                <ServiceScreen />
+              </DashboardContainer>
+            }
+          />
+        </Route>
       </Route>
     </Routes>
   );

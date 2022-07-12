@@ -35,7 +35,8 @@ const ServiceLayer = (
       name={frameId}
       title={iframeTitle}
       src={urlIframe}
-      sandbox="allow-scripts allow-popups allow-same-origin allow-top-navigation"
+      allow=""
+      sandbox="allow-scripts allow-same-origin allow-top-navigation"
       className="max-w-full w-full h-screen"
     />
   );
