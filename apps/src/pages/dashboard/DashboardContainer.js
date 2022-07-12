@@ -8,6 +8,7 @@ const DashboardContainer = ({ children }) => {
   const [service, setService] = useState(false);
 
   const par = useParams();
+  console.log("Params: ", par);
 
   useEffect(() => {
     if (par.pages) {
