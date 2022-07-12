@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import DashboardContainer from "./pages/dashboard/DashboardContainer";
@@ -9,11 +8,6 @@ import UserInfo from "./pages/dashboard/UserInfo";
 import Home from "./pages/Home";
 
 function App() {
-  useEffect(() => {
-    window.addEventListener("message", function (event) {
-      console.log("SuperCMS is listen: ", event);
-    });
-  }, []);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -47,7 +41,6 @@ function App() {
             path=":cmsFree"
             element={
               <DashboardContainer>
-                <h2>This is CMS FREE</h2>
                 <ServiceScreen />
               </DashboardContainer>
             }
