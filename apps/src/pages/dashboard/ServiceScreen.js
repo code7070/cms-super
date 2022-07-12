@@ -30,16 +30,12 @@ const ServiceScreen = (props = { service: {} }) => {
     }
   }, [service]);
 
-  let servicepage = "";
+  let servicepage = "No Service Provied";
   if (service && Object.keys(service).length)
     servicepage = <ServiceLayer {...service} />;
   // servicepage = <EmbedService {...service} />;
 
-  return (
-    <DashboardContainer>
-      <ContentWrapper>{servicepage}</ContentWrapper>
-    </DashboardContainer>
-  );
+  return <ContentWrapper>{servicepage}</ContentWrapper>;
 };
 
 export default ServiceScreen;

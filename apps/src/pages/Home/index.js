@@ -32,7 +32,7 @@ const Home = () => {
         SUPER Homepage
       </p>
       <p className="text-gray-500 text-lg text-center">
-        <p>Please Login</p>
+        <div>Please Login</div>
         {ctaView}
       </p>
       <p className="text-gray-500 text-lg text-center">
