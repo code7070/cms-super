@@ -22,7 +22,8 @@ const DashboardContainer = ({ children }) => {
   useEffect(() => {
     const catcher = (e) => {
       if (e && e.data && e.data.pathname) {
-        const path = `https://wknd-otto.my.id/gold/${pathname}`;
+        const dataPath = e.data.pathname;
+        const path = `https://wknd-otto.my.id/gold/${dataPath}`;
         navigate(path, { replace: true });
       }
     };
