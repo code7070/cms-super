@@ -19,8 +19,6 @@ const DashboardContainer = ({ children, cmsmode }) => {
   }, [par.pages]);
 
   useEffect(() => {
-    console.log("Param Changes: ", par);
-
     if (cmsmode) {
       const listenMessage = (event) => {
         console.log("Super listen: ", event.data);
