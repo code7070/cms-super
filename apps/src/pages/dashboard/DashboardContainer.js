@@ -9,8 +9,6 @@ const DashboardContainer = ({ children }) => {
 
   const par = useParams();
 
-  console.log("Params: ", par);
-
   useEffect(() => {
     if (par.pages) {
       const found = getServiceMatching(par.pages);
