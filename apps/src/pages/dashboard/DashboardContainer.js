@@ -29,7 +29,7 @@ const DashboardContainer = ({ children, cmsmode }) => {
         // const formattingTail = `${tail}`.replace(/^\/|\/$/g, '')
         const fullpath = `${defaults}/${pages}/${tail}`;
         console.log(`Navigate to: ${fullpath}`);
-        navigate(fullpath, { replace: true });
+        if (tail && tail !== "/") navigate(fullpath, { replace: true });
       };
 
       window.addEventListener("message", listenMessage);
