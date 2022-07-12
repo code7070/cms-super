@@ -33,8 +33,10 @@ const DashboardContainer = ({ children }) => {
 
       if (e && e.data && e.data.pathname) {
         const dataPath = `${e.data.pathname}`;
+        const paths =
+          `${dataPath}`.charAt(0) === "/" ? dataPath.slice(1) : dataPath;
         const dataSearch = `${e.data.search}`;
-        const target = `${currentPath}${dataPath}${dataSearch}`;
+        const target = `${currentPath}${paths}${dataSearch}`;
         console.log("Navigate to: ", target);
         navigate(target, { replace: true });
       }
