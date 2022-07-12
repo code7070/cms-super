@@ -26,20 +26,24 @@ const DashboardContainer = ({ children }) => {
 
   useEffect(() => {
     const catcher = (e) => {
+      console.log("SuperCMS is listen: ", e);
+
+      const currentPath = loc.pathname;
+      // const currentSearch = loc.search;
+
       if (e && e.data && e.data.pathname) {
         const dataPath = `${e.data.pathname}`;
-        const paths = dataPath.charAt(0) === "/" ? dataPath : `/${dataPath}`;
-        const path = `https://wknd-otto.my.id/gold${paths}`;
-        console.log("Navigate to: ", path);
+        const dataSearch = `${e.data.search}`;
+        const target = `${currentPath}${dataPath}${dataSearch}`;
+        console.log("Navigate to: ", target);
         // navigate(path, { replace: true });
       }
     };
 
-    window.addEventListener("message", function (event) {
-      console.log("SuperCMS is listen: ", event);
-      catcher(event);
-    });
-  }, [navigate]);
+    window.addEventListener("message", catcher);
+
+    return () => window.removeEventListener("message", catcher);
+  }, [navigate, loc.pathname]);
 
   const propsPass = { service };
 
