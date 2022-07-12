@@ -43,7 +43,14 @@ function App() {
               </DashboardContainer>
             }
           />
-          <Route path=":cmsFree" element={<div>Hello CMS FREE!!!</div>} />
+          <Route
+            path=":cmsFree"
+            element={
+              <DashboardContainer>
+                <h2>This is CMS FREE</h2>
+              </DashboardContainer>
+            }
+          />
         </Route>
       </Route>
     </Routes>
