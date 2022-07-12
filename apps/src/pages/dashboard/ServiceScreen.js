@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { ContentWrapper } from ".";
 import {
@@ -7,14 +8,20 @@ import {
   isLogin,
   sendFormPost,
 } from "../../helpers/util";
+import { setCms } from "../../redux/slices/cms";
 import ServiceLayer from "./ServiceLayer";
 
 const ServiceScreen = (props = { service: {} }) => {
   const { service } = props;
   const routePar = useParams();
 
+  const currentCms = useSelector(({ cms }) => cms.value);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    if (service && Object.keys(service).length) {
+    const hasService = service && Object.keys(service).length;
+
+    if (hasService && currentCms !== service.iframe) {
       const now = getTimeNow();
       const target = getFrameCmsId();
       const superAuth = isLogin();
@@ -27,11 +34,14 @@ const ServiceScreen = (props = { service: {} }) => {
         console.log("Form Post: ", mainpath);
         const form = { path: `${iframe}?timehook=${now}`, target };
         await sendFormPost({ ...form, params });
+
+        // DISPATCH IFRAME URL TO REDUCERS
+        dispatch(setCms(iframe));
       };
 
       if (el && el.hasAttribute("src")) hit({ superAuth });
     }
-  }, [service, routePar.tailcms]);
+  }, [service, routePar.tailcms, currentCms, dispatch]);
 
   let servicepage = "No Service Provied";
   if (service && Object.keys(service).length)

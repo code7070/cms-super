@@ -1,8 +1,10 @@
 import React from "react";
+import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import reduxStore from "./redux/store";
 // import * as serviceWorker from "./serviceWorkerRegistration";
 // import reportWebVitals from './reportWebVitals';
 
@@ -10,7 +12,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <React.StrictMode>
-      <App />
+      <Provider store={reduxStore}>
+        <App />
+      </Provider>
     </React.StrictMode>
   </BrowserRouter>
 );
