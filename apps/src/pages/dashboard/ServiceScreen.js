@@ -36,7 +36,7 @@ const ServiceScreen = (props = { service: {} }) => {
           mainpath,
           tailcms: routePar.tailcms,
         });
-        const form = { path: `${iframe}?timehook=${now}`, target };
+        const form = { path: mainpath, target };
         await sendFormPost({ ...form, params });
 
         // DISPATCH IFRAME URL TO REDUCERS
