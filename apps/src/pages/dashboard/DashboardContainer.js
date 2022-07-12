@@ -26,7 +26,7 @@ const DashboardContainer = ({ children }) => {
 
   useEffect(() => {
     const catcher = (e) => {
-      console.log("SuperCMS is listen: ", e);
+      console.log("SuperCMS is listen  {data}: ", e.data);
 
       const currentPath = loc.pathname;
       // const currentSearch = loc.search;
