@@ -21,7 +21,7 @@ const ServiceLayer = (
   const urlIframe = `${frame}?timehook=${now}`;
 
   const frameLoaded = (e) => {
-    console.log("iframe loaded", e);
+    console.log("IFRAME LOADED", e);
     const frameCMS = document.getElementById(frameId);
     if (frameCMS && frameCMS.contentWindow) {
       // console.log("href: ", frameCMS.contentWindow.location.href);

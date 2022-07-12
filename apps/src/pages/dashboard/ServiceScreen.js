@@ -6,6 +6,7 @@ import {
   isLogin,
   sendFormPost,
 } from "../../helpers/util";
+import DashboardContainer from "./DashboardContainer";
 import ServiceLayer from "./ServiceLayer";
 
 const ServiceScreen = (props = { service: {} }) => {
@@ -34,7 +35,11 @@ const ServiceScreen = (props = { service: {} }) => {
     servicepage = <ServiceLayer {...service} />;
   // servicepage = <EmbedService {...service} />;
 
-  return <ContentWrapper>{servicepage}</ContentWrapper>;
+  return (
+    <DashboardContainer>
+      <ContentWrapper>{servicepage}</ContentWrapper>
+    </DashboardContainer>
+  );
 };
 
 export default ServiceScreen;

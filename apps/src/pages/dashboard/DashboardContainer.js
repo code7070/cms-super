@@ -11,8 +11,6 @@ const DashboardContainer = ({ children }) => {
   const loc = useLocation();
   const par = useParams();
 
-  console.log("Params: ", par);
-
   useEffect(() => {
     if (par.pages) {
       const found = getServiceMatching(par.pages);
@@ -22,7 +20,19 @@ const DashboardContainer = ({ children }) => {
 
   useEffect(() => {
     console.log("Param Changes: ", par);
-  }, [par]);
+
+    const listenMessage = (event) => {
+      console.log("Super listen: ", event.data);
+      const { pages = "", tailcms = "" } = par;
+      const defaults = "/dashboard";
+      const fullpath = `${defaults}/${pages}/${tailcms}`;
+      console.log(`Navigate to: ${fullpath}`, { fullpath });
+    };
+
+    window.addEventListener("message", listenMessage);
+
+    return () => window.removeEventListener("message", listenMessage);
+  }, [par, loc.pathname]);
 
   // useEffect(() => {
   //   const catcher = (e) => {

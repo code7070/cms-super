@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import DashboardContainer from "./pages/dashboard/DashboardContainer";
 import MainDashboard from "./pages/dashboard/MainDashboard";
 // import NewDashboard from "./pages/dashboard/NewDashboard";
 import ServiceScreen from "./pages/dashboard/ServiceScreen";
@@ -12,39 +11,11 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="dashboard">
-        <Route
-          index
-          element={
-            <DashboardContainer>
-              <MainDashboard />
-            </DashboardContainer>
-          }
-        />
-        <Route
-          path="user-info"
-          element={
-            <DashboardContainer>
-              <UserInfo />
-            </DashboardContainer>
-          }
-        />
+        <Route index element={<MainDashboard />} />
+        <Route path="user-info" element={<UserInfo />} />
         <Route path=":pages">
-          <Route
-            index
-            element={
-              <DashboardContainer>
-                <ServiceScreen />
-              </DashboardContainer>
-            }
-          />
-          <Route
-            path=":cmsFree"
-            element={
-              <DashboardContainer>
-                <ServiceScreen />
-              </DashboardContainer>
-            }
-          />
+          <Route index element={<ServiceScreen />} />
+          <Route path=":tailcms" element={<ServiceScreen />} />
         </Route>
       </Route>
     </Routes>
